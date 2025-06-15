@@ -1,4 +1,4 @@
-package config;
+package core.config;
 
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +15,7 @@ import javax.sql.DataSource;
         dataSourceRef = "dataSource",
         transactionManagerRef = "transactionManager"
 )
-public class BatchConfig {
+public class DatabaseConfig {
 
     @Bean
     public DataSource dataSource() {
