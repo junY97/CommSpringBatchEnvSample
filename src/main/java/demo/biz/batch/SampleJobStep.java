@@ -1,6 +1,7 @@
 package demo.biz.batch;
 
 import core.AbstractTaskJobDefinition;
+
 import lombok.extern.log4j.Log4j2;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -18,7 +19,7 @@ public class SampleJobStep extends AbstractTaskJobDefinition {
 
     @Bean
     public Job sampleJob(JobRepository jobRepository, Step sampleStep) {
-        return super.job("sampleJob", jobRepository, sampleStep);
+        return super.job("testJob", jobRepository, sampleStep);
     }
 
     @Bean

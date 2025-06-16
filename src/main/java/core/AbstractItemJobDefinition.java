@@ -21,6 +21,7 @@ public abstract class AbstractItemJobDefinition<I, O> {
     /**
      * JobRepository와 Step Bean을 Spring DI 컨테이너로부터 직접 주입받습니다.
      */
+
     protected Job job(String jobName, JobRepository jobRepository, Step step) {
         return new JobBuilder(jobName, jobRepository)
                 .incrementer(new RunIdIncrementer())

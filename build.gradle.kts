@@ -18,7 +18,10 @@ repositories {
 }
 
 dependencies {
-	runtimeOnly("com.h2database:h2")
+	implementation("com.microsoft.sqlserver:mssql-jdbc:9.4.1.jre8")
+	implementation("com.zaxxer:HikariCP:5.0.1")
+	implementation("org.projectlombok:lombok")
+	annotationProcessor("org.projectlombok:lombok")
 	implementation("org.springframework.boot:spring-boot-starter-batch")
 	implementation("org.springframework.boot:spring-boot-starter-quartz")
 	implementation("org.springframework.boot:spring-boot-starter-web")

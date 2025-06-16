@@ -11,11 +11,10 @@ import java.util.Map;
 @Service
 public class SampleService {
 
-    private final SampleJobStep sampleJobStep;
     private final BatchExecutionService batchExecutionService;
 
     public String SampleBatch() throws Exception {
-        batchExecutionService.runJob("sampleJob", Map.of());
+        batchExecutionService.runJob("sampleJob");
         return "success";
     }
 }
