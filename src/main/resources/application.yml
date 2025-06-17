@@ -1,0 +1,54 @@
+spring:
+  application:
+    name: demo
+  batch:
+    job:
+      enabled: false
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://192.168.0.175:1433;databaseName=BATCH;encrypt=true;trustServerCertificate=true;
+    username: sa
+    password: sw!234
+    hikari:
+      maximum-pool-size: 50
+      minimum-idle: 10
+      idle-timeout: 600000
+      connection-timeout: 30000
+      max-lifetime: 1800000
+
+  model:
+    record-fetch:
+      restrict-level: warning
+      max-count: 100
+    character-set:
+      input: UTF-8,UTF-8
+      output: UTF-8,UTF-8
+    database:
+      name: DB1
+      dbcp:
+        default-auto-commit: false
+        default-transaction-isolation: TRANSACTION_READ_COMMITED
+        initial-size: 1
+        log-abandoned: true
+        max-active: 200
+        max-idle: 100
+        max-wait: 10000
+        min-idle: 50
+        driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+        url: jdbc:sqlserver://192.168.0.175:1433;databaseName=BATCH;encrypt=true;trustServerCertificate=true;
+        username: sa
+        password: sw!234
+        remove-abandoned: true
+        remove-abandoned-timeout: 0
+        validation-query: select getdate()
+
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+# application.yml
+logging:
+  level:
+    demo.biz.mapper.SampleMapper: TRACE
+    java.sql.ResultSet: TRACE

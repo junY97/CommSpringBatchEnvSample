@@ -1,4 +1,4 @@
-package core.util;
+package core.common;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,13 +20,13 @@ import java.util.stream.Collectors;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class BatchExecutionService {
+public class BatchManager {
 
     private final JobLauncher jobLauncher;
     private final JobExplorer jobExplorer;
     private final ApplicationContext applicationContext;
 
-    public JobExecution runJob(String jobName) {
+    public JobExecution runJob(String jobName, JobParametersBuilder jobParametersBuilder) {
         try {
             Map<String, Job> jobsMap = applicationContext.getBeansOfType(Job.class);
             Job jobToRun = jobsMap.values().stream()
@@ -44,7 +44,7 @@ public class BatchExecutionService {
                                 String.format("Job with name '%s' not found. Available jobs: [%s]", jobName, availableJobsInfo)
                         );
                     });
-            JobParametersBuilder jobParametersBuilder = new JobParametersBuilder();
+
             jobParametersBuilder.addLong("timestamp", System.currentTimeMillis());
 
             JobExecution jobExecution = jobLauncher.run(jobToRun, jobParametersBuilder.toJobParameters());

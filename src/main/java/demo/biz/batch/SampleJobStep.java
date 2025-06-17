@@ -2,6 +2,9 @@ package demo.biz.batch;
 
 import core.AbstractTaskJobDefinition;
 
+import demo.biz.dto.SampleDto;
+import demo.biz.mapper.SampleMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -13,13 +16,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 
-@Component
+import java.util.List;
+
 @Log4j2
+@Component
+@RequiredArgsConstructor
 public class SampleJobStep extends AbstractTaskJobDefinition {
+
+    private final SampleMapper sampleMapper;
 
     @Bean
     public Job sampleJob(JobRepository jobRepository, Step sampleStep) {
-        return super.job("testJob", jobRepository, sampleStep);
+        return super.job("sampleJob", jobRepository, sampleStep);
     }
 
     @Bean
@@ -30,18 +38,18 @@ public class SampleJobStep extends AbstractTaskJobDefinition {
     @Override
     @Bean
     @StepScope
-    protected Tasklet tasklet() {
+    protected Tasklet tasklet()  {
         return (contribution, chunkContext) -> {
-            log.info(">>>>> 30일이 지난 임시 파일 삭제 작업을 시작합니다...");
+            // 여기에 실제 비지니스 로직을 구현
+            List<SampleDto> sampleDto = sampleMapper.selectDummy();
+            sampleMapper.insertHardcodedDummyData();
+            log.info(sampleDto.get(0).getSampleName());
+            log.info(sampleDto.get(1).getSampleName());
 
-            // 여기에 실제 파일 삭제 로직을 구현
-            // 예: FileUtils.deleteDirectory(new File("/path/to/temp"));
 
-            log.info(">>>>> 임시 파일 삭제 작업이 성공적으로 완료되었습니다.");
             return RepeatStatus.FINISHED;
         };
     }
 
 
 }
-

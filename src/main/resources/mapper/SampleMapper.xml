@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="demo.biz.mapper.SampleMapper">
+
+    <select id="selectDummy" resultType="demo.biz.dto.SampleDto">
+        SELECT * FROM DUMMY_SAMPLE_TABLE
+    </select>
+
+    <!-- DUMMY_SAMPLE_TABLE에 임의의 데이터를 삽입하는 INSERT 문 (SAMPLE_ID 제외) -->
+    <insert id="insertHardcodedDummyData">
+        INSERT INTO DUMMY_SAMPLE_TABLE (
+        SAMPLE_NAME,
+        SAMPLE_DESCRIPTION,
+        SAMPLE_VALUE,
+        IS_ACTIVE,
+        CREATED_AT,
+        UPDATED_AT
+        ) VALUES (
+        '임의의 샘플 이름',        -- SAMPLE_NAME (문자열)
+        '이것은 임의로 지정된 샘플 데이터입니다.', -- SAMPLE_DESCRIPTION (문자열)
+        99.99,                   -- SAMPLE_VALUE (숫자형, 예: BigDecimal)
+        1,                       -- IS_ACTIVE (불리언, 1=true, 0=false)
+        CURRENT_TIMESTAMP,       -- CREATED_AT (타임스탬프, 대부분의 DB에서 지원)
+        NULL                     -- UPDATED_AT (타임스탬프, 초기에는 NULL일 수 있음)
+        )
+    </insert>
+
+</mapper>

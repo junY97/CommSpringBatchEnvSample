@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * @author junyeong.jo .
+ * @author junyeong.jo .+++++++++++++++++++++++++++++++++++++++++
  * @since 2025-06-16
  */
 @Data
